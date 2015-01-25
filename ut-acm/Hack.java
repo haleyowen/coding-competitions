@@ -24,7 +24,12 @@ public class Hack {
         ArrayList<String> cur = permutations.get(j);
         for(int i = 0; i < cur.size(); i++) {
 
-          if(numZeroes(xor(lock, cur.get(i), size)) > numZeroes(lock)) {
+          if(numZeroes(lock) == size) {
+            System.out.println("YES");
+            quit = true;
+            break;
+          }
+          else {
             lock = xor(lock, cur.get(i), size);
           }
         }
