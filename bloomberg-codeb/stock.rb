@@ -46,8 +46,34 @@ helpers do
 
   def parseTicker(data)
     parse = data.split(" ")
-    tick = []
+    puts(parse)
+    marketData = []
     i = 0
+    while i < parse.length do
+      temp = Market.new(parse[i], parse[i+1], parse[i+2], parse[i+3], parse[i+4])
+      marketData.push(temp)
+      
+    end
+
+    return marketData
+  end
+
+  def getMaxId(data)
+    i = 0
+    maxId = 0
+    maxIndex = 0
+    puts(data)
+    while i < data.length do
+      if [maxId, data[i].getId().to_i].max > maxId
+        maxId = data[i].getId().to_i
+        maxIndex = i
+      end
+      i += 5
+    end
+
+    maxId -= 1
+
+    return Market.new(data[i], data[i+1], data[i+2], data[i+3], data[i+4])
   end
 
 end
@@ -59,6 +85,22 @@ class Market
     @worth = worth
     @bid = bid
     @ask = ask
+
+    def getId()
+      return @id
+    end
+    def getStock() 
+      return @stock
+    end
+    def getWorth()
+      return @worth
+    end
+    def getBid()
+      return @bid
+    end
+    def getAsk()
+      return @ask
+    end
   end
 end
 

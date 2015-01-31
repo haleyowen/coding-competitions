@@ -3,6 +3,7 @@
   <table data-toggle="table">
     <thead>
       <tr>
+        <th data-field="id">Id</th>
         <th data-field="stocks">Stocks</th>
         <th data-field="worth">Net Worth</th>
         <th data-field="bid">Bid</th>
@@ -10,7 +11,18 @@
       </tr>
     </thead>
     <tbody>
-    </tbody>
+      
+
+      <% marketData.each do |md| %>
+            <tr>
+              <td><%= md.getId() %></td>
+              <td><%= md.getStock() %></td>
+              <td><%= md.getWorth() %></td>
+              <td><%= md.getBid() %></td>
+              <td><%= md.getAsk() %></td>
+            </tr>
+          <% end %>
+        </tbody>
 
   </table>
 </div>
