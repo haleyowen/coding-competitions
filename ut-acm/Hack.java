@@ -20,7 +20,7 @@ public class Hack {
 
       boolean quit = false;
       ArrayList<ArrayList<String>> permutations = permute(keys);
-      System.out.println(permutations);
+      System.out.println(permutations.size());
       for(int j = 0; j < permutations.size(); j++) {
         ArrayList<String> cur = permutations.get(j);
         for(int i = 0; i < cur.size(); i++) {
