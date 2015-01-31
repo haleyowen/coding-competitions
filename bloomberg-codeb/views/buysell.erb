@@ -27,13 +27,13 @@
     stroke: #000;
   }
 </style>
-
-    <div id="graph" class="aGraph" style="margin-left: 125px;position:absolute;top:0px;left:0; float:left;"></div>
+<h2 style="margin-left: 525px; margin-bottom: -40px">Cash On Hand</h2>
+<div id="graph" class="aGraph" style="margin-left: 125px;top:0px;left:0; float:left;"></div>
 <div style="margin-top: 300px">
   <table data-toggle="table" class="table table-hover">
     <thead>
       <tr>
-        <th data-field="id" data-sortable="true">Id</th>
+        <th data-align="center" data-field="id" data-sortable="true">Id</th>
         <th data-field="type" data-sortable="true">Type</th>
         <th data-field="stock" data-sortable="true">Stock</th>
         <th data-field="price" data-sortable="true">Price</th>
@@ -135,6 +135,5 @@
       // Add the line by appending an svg:path element with the data line we created above
       // do this AFTER the axes above so that the line is above the tick-lines
       graph.append("svg:path").attr("d", line(data));
-
 
     </script>
