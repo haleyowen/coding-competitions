@@ -1,0 +1,23 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Shares</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% res.each do |x| %>
+        <tr>
+          <td><%= x.getType() %></td>
+          <td><%= x.getStock() %></td>
+          <td><%= x.getPrice() %></td>
+          <td><%= x.getShares() %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
