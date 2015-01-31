@@ -2,6 +2,9 @@
 require 'sinatra'
 
 get '/' do
+  erb :index
+end
+get '/orders' do
   res = ""
   File.open("test.txt") do |f|
     f.each_line do |line|
@@ -11,16 +14,25 @@ get '/' do
   erb :buysell, :locals => {:res => parse(res)}
 end
 
+get '/market' do
+  erb :market
+end
+
 helpers do
   def parse(res)
     parseArr = res.split(" ")
     bidaskArr = []
     i = 0
+    id = 0
     while i < parseArr.length do
-      temp = BidAsk.new(parseArr[i], parseArr[i+1], parseArr[i+2], parseArr[i+3])
-      puts(temp.getType())
-      bidaskArr.push(temp)
-      i += 4
+      if parseArr[i] == "BUY" || parseArr[i] == "SELL"
+        temp = BidAsk.new(id, parseArr[i], parseArr[i+1], parseArr[i+2], parseArr[i+3], parseArr[i+4])
+        bidaskArr.push(temp)
+        i += 5
+        id += 1
+      else
+        i += 3
+      end
     end
 
     return bidaskArr
@@ -29,11 +41,17 @@ end
 
 
 class BidAsk
-  def initialize(type, stock, price, shares)
+  def initialize(id, type, stock, price, shares, cash)
+    @id = id
     @type = type
     @stock = stock
     @price = price
     @shares = shares
+    @cash = cash
+  end
+
+  def getId()
+    return @id
   end
   def getType()
     return @type
@@ -49,5 +67,9 @@ class BidAsk
 
   def getShares()
     return @shares
+  end
+
+  def getCash()
+    return @cash
   end
 end
