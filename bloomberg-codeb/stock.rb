@@ -15,7 +15,13 @@ get '/orders' do
 end
 
 get '/market' do
-  erb :market
+  marketData = ""
+  File.open("ticker.txt") do |f|
+    f.each_line do |line|
+      marketData += line
+    end
+  end
+  erb :market, :locals => {:marketData => parseTicker(marketData)}
 end
 
 helpers do
@@ -37,8 +43,23 @@ helpers do
 
     return bidaskArr
   end
+
+  def parseTicker(data)
+    parse = data.split(" ")
+    tick = []
+    i = 0
+  end
+
 end
 
+class Market
+  def initialize(id, stock, worth, bid, ask)
+    @id = id
+    @stock = stock
+    @worth = worth
+    @bid = bid
+    @ask = ask
+  end
 
 class BidAsk
   def initialize(id, type, stock, price, shares, cash)
