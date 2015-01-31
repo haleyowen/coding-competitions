@@ -60,6 +60,7 @@ class Market
     @bid = bid
     @ask = ask
   end
+end
 
 class BidAsk
   def initialize(id, type, stock, price, shares, cash)
