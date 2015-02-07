@@ -46,15 +46,39 @@ helpers do
 
   def parseTicker(data)
     parse = data.split(" ")
-    puts(parse)
     marketData = []
     i = 0
     while i < parse.length do
+      id = parse[i].to_i
       temp = Market.new(parse[i], parse[i+1], parse[i+2], parse[i+3], parse[i+4])
       marketData.push(temp)
-      
+      i+=5  
+    end
+      id -= 1
+
+    i = 0
+    marketData = []
+    prevData = []
+    while i < parse.length do
+        if parse[i].to_i == id 
+            marketData.push(Market.new(parse[i], parse[i+1], parse[i+2], parse[i+3], parse[i+4]))
+        elsif parse[i].to_i == id-1
+            prevData.push(Market.new(parse[i], parse[i+1], parse[i+2], parse[i+3], parse[i+4]))
+        end
+        i+=5
     end
 
+    i = 0
+    puts(marketData.length)
+    puts(marketData.length)
+    while i < marketData.length do
+        if marketData[i].getWorth() != "None" && prevData[i].getWorth() != "None" && marketData[i].getWorth().to_f - prevData[i].getWorth().to_f > 0
+            marketData[i].setColor("green")
+        elsif marketData[i].getWorth() != "None" && prevData[i].getWorth() != "None" && marketData[i].getWorth().to_f - prevData[i].getWorth().to_f < 0
+            marketData[i].setColor("red")
+        end
+        i += 1
+    end
     return marketData
   end
 
@@ -85,7 +109,14 @@ class Market
     @worth = worth
     @bid = bid
     @ask = ask
+  end
 
+  def setColor(color)
+      @color = color
+  end
+  def getColor()
+      return @color
+  end
     def getId()
       return @id
     end
@@ -101,7 +132,6 @@ class Market
     def getAsk()
       return @ask
     end
-  end
 end
 
 class BidAsk
